@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework import generics
 from django.contrib.auth.models import User
-from .models import Category, Book, Product
-from .serializers import CategorySerializer, BookSerializer, ProductSerializer, UserSerializer
+from .models import Category, Book, Product, Cart
+from .serializers import CategorySerializer, BookSerializer, ProductSerializer, UserSerializer, CartSerializer
 from rest_framework import permissions
 
 class ListCategory(generics.ListCreateAPIView):
@@ -46,4 +46,14 @@ class DetailUser(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.IsAuthenticated,)
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+class ListCart(generics.ListCreateAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
+    queryset = Cart.objects.all()
+    serializer_class = CartSerializer
+
+class DetailCart(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (permissions.IsAuthenticated,)
+    queryset = Cart.objects.all()
+    serializer_class = CartSerializer    
 
